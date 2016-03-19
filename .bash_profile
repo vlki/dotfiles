@@ -32,6 +32,11 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
+# Init autojump
+if [ -f `brew --prefix`/etc/autojump.sh ]; then
+    . `brew --prefix`/etc/autojump.sh
+fi
+
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
 	complete -o default -o nospace -F _git g;

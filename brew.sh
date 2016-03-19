@@ -32,6 +32,9 @@ brew install bash
 brew tap homebrew/versions
 brew install bash-completion2
 
+# Autojump is good for fast directory switching
+brew install autojump
+
 # Install `wget` with IRI support.
 brew install wget --with-iri
 
