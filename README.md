@@ -1,6 +1,6 @@
 # Jan’s dotfiles
 
-OS X dotfiles: bash, vim, brew, ...
+OS X & Linux dotfiles: bash, vim, brew, ...
 
 Based on magnificent dotfiles of Mathias Bynens: https://github.com/mathiasbynens/dotfiles.git
 
@@ -11,10 +11,10 @@ Based on magnificent dotfiles of Mathias Bynens: https://github.com/mathiasbynen
 You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with `~/dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
 
 ```bash
-git clone https://github.com/vlki/dotfiles.git && cd dotfiles && source bootstrap.sh
+git clone https://github.com/vlki/dotfiles.git && cd dotfiles/osx && source bootstrap.sh
 ```
 
-To update, `cd` into your local `dotfiles` repository and then:
+To update, `cd` into your local `dotfiles/osx` repository and then:
 
 ```bash
 source bootstrap.sh
@@ -25,16 +25,6 @@ Alternatively, to update while avoiding the confirmation prompt:
 ```bash
 set -- -f; source bootstrap.sh
 ```
-
-### Git-free install
-
-To install these dotfiles without Git:
-
-```bash
-cd; curl -#L https://github.com/mathiasbynens/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh,LICENSE-MIT.txt}
-```
-
-To update later on, just run that command again.
 
 ### Specify the `$PATH`
 
@@ -70,6 +60,7 @@ You could also use `~/.extra` to override settings, functions and aliases from m
 When setting up a new Mac, you may want to set some sensible OS X defaults:
 
 ```bash
+cd osx
 ./.osx
 ```
 
@@ -78,5 +69,6 @@ When setting up a new Mac, you may want to set some sensible OS X defaults:
 When setting up a new Mac, you may want to install some common [Homebrew](http://brew.sh/) formulae (after installing Homebrew, of course):
 
 ```bash
+cd osx
 ./brew.sh
 ```
