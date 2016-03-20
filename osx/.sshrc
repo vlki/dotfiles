@@ -1,5 +1,4 @@
 # Expect having the dotfiles at the following path
-echo "foo"
 if [ -f ~/vlki/dotfiles/linux/.bash_profile ]; then
 	echo "sourced ~/vlki/dotfiles/linux/.bash_profile";
 	source ~/vlki/dotfiles/linux/.bash_profile;
