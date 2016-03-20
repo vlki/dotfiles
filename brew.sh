@@ -68,6 +68,9 @@ brew install pv
 # Batch renaming tool
 brew install rename
 
+# Using ngrep for network sniffing
+brew install ngrep
+
 # Opensource implementation of JavaScript written entirely in Java
 # brew install rhino
 
