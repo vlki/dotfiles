@@ -6,7 +6,7 @@ Based on magnificent dotfiles of Mathias Bynens: https://github.com/mathiasbynen
 
 ## Installation
 
-### Using Git and the bootstrap script
+### OS X - Using Git and the bootstrap script
 
 You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with `~/dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
 
@@ -24,6 +24,14 @@ Alternatively, to update while avoiding the confirmation prompt:
 
 ```bash
 set -- -f; source bootstrap.sh
+```
+
+### Linux without git
+
+Run this to download latest linux dotfiles to current directory
+
+```bash
+mkdir dotfiles; cd dotfiles; curl -#L https://github.com/vlki/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={osx,README.md,LICENSE-MIT.txt}; cd ..
 ```
 
 ### Specify the `$PATH`

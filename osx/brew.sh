@@ -59,6 +59,10 @@ brew install woff2
 # Install other useful binaries.
 brew install git
 
+# As I like having stuff a bit easier (and be able to activate my bash profile
+# on target server without changing the profile to everybody)
+brew install sshrc
+
 # For toggling between light & dark mode of OS X
 brew install dark-mode
 
