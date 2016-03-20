@@ -1,7 +1,5 @@
-" Use the Solarized Dark theme
-set background=dark
-colorscheme solarized
-let g:solarized_termtrans=1
+" Use the One Dark theme
+colorscheme onedark
 
 " Make Vim more useful
 set nocompatible
