@@ -1,0 +1,31 @@
+"*":
+  core:
+    disabledPackages: [
+      "language-hyperlink"
+    ]
+  editor:
+    fontSize: 12
+    invisibles: {}
+    showInvisibles: true
+    tabLength: 4
+  "exception-reporting":
+    userId: "c68b8575-8ce5-4d1d-3739-65b540f7901d"
+  "file-types":
+    js: "source.js.jsx"
+  minimap: {}
+  "one-dark-ui": {}
+  "tree-view": {}
+  welcome:
+    showOnStartup: false
+".attribute-values.js.jsx.source":
+  editor:
+    tabLength: 4
+".js.jsx.react.source":
+  editor:
+    tabLength: 4
+".js.jsx.source":
+  editor:
+    tabLength: 4
+".js.source.subtlegradient":
+  editor:
+    tabLength: 4
