@@ -98,3 +98,23 @@ brew install tldr
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# Casks
+brew cask install appcleaner
+brew cask install atom
+brew cask install diffmerge
+brew cask install dropbox
+brew cask install google-chrome
+brew cask install google-drive
+brew cask install iterm2
+brew cask install java
+brew cask install keepingyouawake
+brew cask install postman
+brew cask install prey
+brew cask install sketch
+brew cask install slack
+brew cask install spotify
+brew cask install steam
+brew cask install transmission
+brew cask install transmit
+brew cask install vlc
