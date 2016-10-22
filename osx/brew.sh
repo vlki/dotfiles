@@ -108,6 +108,7 @@ brew cask install google-chrome
 brew cask install google-drive
 brew cask install iterm2
 brew cask install java
+brew cask install jing
 brew cask install keepingyouawake
 brew cask install postman
 brew cask install prey
