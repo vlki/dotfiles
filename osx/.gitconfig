@@ -153,6 +153,11 @@
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
+[mergetool "diffmerge"]
+
+	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	trustExitCode = true
+
 # URL shorthands
 
 [url "git@github.com:"]
@@ -174,3 +179,10 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+# Me
+
+[user]
+
+	name = "Jan Vlcek"
+	email = "vlki@vlki.cz"
