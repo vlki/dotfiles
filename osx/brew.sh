@@ -38,12 +38,6 @@ brew install autojump
 # Install `wget` with IRI support.
 brew install wget --with-iri
 
-# Install RingoJS and Narwhal.
-# Note that the order in which these are installed is important;
-# see http://git.io/brew-narwhal-ringo.
-brew install ringojs
-brew install narwhal
-
 # Install more recent versions of some OS X tools.
 brew install vim --override-system-vi
 brew install homebrew/dupes/grep
@@ -72,26 +66,35 @@ brew install pv
 # Batch renaming tool
 brew install rename
 
-# Using ngrep for network sniffing
-brew install ngrep
-
-# Opensource implementation of JavaScript written entirely in Java
-# brew install rhino
-
 # Command line interface for testing internet bandwidth using speedtest.net
-# brew install speedtest_cli
+brew install speedtest_cli
 
 # Installs public key to target server's authorized_keys
-# brew install ssh-copy-id
+brew install ssh-copy-id
 
 # Tool for testing any server port for the SSL/TLS ciphers, etc.
-# brew install testssl
+brew install testssl
 
 # Recursive directory listing command
 brew install tree
 
 # Commandline tool for doing screenshots of webpages
 # brew install webkit2png
+
+# Node.JS, we want to use JavaScript in console!
+brew install node
+
+# So we can use Flow JS type-checker
+brew install flow
+
+# Heroku toolbelt
+brew install heroku
+
+# Well, I don't always get all the British accents
+brew install subliminal
+
+# Because reading through man pages is not my favourite pasttime
+brew install tldr
 
 # Remove outdated versions from the cellar.
 brew cleanup
