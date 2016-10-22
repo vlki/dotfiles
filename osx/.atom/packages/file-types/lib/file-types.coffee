@@ -19,7 +19,33 @@ module.exports =
 
   _off: []
 
+  _onceAllPackagesActivated: null
+
   activate: (state) ->
+    unless @_onceAllPackagesActivated?
+      @_onceAllPackagesActivated = atom.packages.onDidActivateInitialPackages =>
+        @_initialize state
+
+  deactivate: ->
+    o?() for o in @_off
+    @_onceAllPackagesActivated.dispose()
+    @_onceAllPackagesActivated = null
+
+  serialize: ->
+
+  loadConfig: (config = {}) ->
+    @debug = config.$debug is yes
+    @caseSensitive = config.$caseSensitive is yes
+    @snp = new ScopeNameProvider()
+    for fileType, scopeName of config
+      # Skip special settings
+      # (hopefully this won't conflict with any file types)
+      continue if /^\$/.test fileType
+
+      @snp.registerMatcher fileType, scopeName, caseSensitive: @caseSensitive
+    @_log @snp
+
+  _initialize: (state) ->
     @_off.push atom.config.observe CONFIG_KEY, (newValue) =>
       @loadConfig newValue
       for editor in atom.workspace.getTextEditors()
@@ -36,35 +62,13 @@ module.exports =
       for scopeName in @snp.getScopeNames() when g.scopeName is scopeName
         for editor in atom.workspace.getTextEditors()
           @_tryToSetGrammar editor
+
     @_off.push atom.grammars.onDidAddGrammar updateEditorGrammars
     @_off.push atom.grammars.onDidUpdateGrammar updateEditorGrammars
 
-  deactivate: ->
-    o?() for o in @_off
-
-  serialize: ->
-
-  loadConfig: (config = {}) ->
-    @debug = config.$debug is yes
-    @caseSensitive = config.$caseSensitive is yes
-    @snp = new ScopeNameProvider()
-    for fileType, scopeName of config
-      # Skip special settings
-      # (hopefully this won't conflict with any file types)
-      continue if /^\$/.test fileType
-
-      # If `fileType` contains a dot, starts with a caret, or ends with a dollar,
-      # we assume it is a regular expression matcher
-      if /(^\^)|(\.)|(\$$)/.test fileType
-        @snp.registerMatcher fileType, scopeName
-      else
-        # Otherwise, we assume it is an extension matcher
-        @snp.registerExtension fileType, scopeName
-    @_log @snp
-
   _tryToSetGrammar: (editor) ->
     filename = basename editor.getPath()
-    scopeName = @snp.getScopeName filename, caseSensitive: @caseSensitive
+    scopeName = @snp.getScopeName filename
     unless scopeName?
       @_log "no custom scopeName for #{filename}...skipping"
       return

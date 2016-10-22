@@ -7,6 +7,7 @@
   'tmpl'
   'tpl'
   'xhtml'
+  'jsp'
 ]
 'patterns': [
   {
@@ -144,19 +145,19 @@
         'if|include|init|' +
         'keydown|keypress|keyup|' +
         'list|' +
-        'messages|message|model|model-options|mousedown|mouseenter|mouseleave|mousemove|mouseover|mouseup|' +
+        'messages|message|model-options|model|mousedown|mouseenter|mouseleave|mousemove|mouseover|mouseup|' +
         'non-bindable|' +
         'open|options|' +
         'paste|pluralize|' +
-        'readonly|repeat-start|repeat-end|repeat|' +
-        'selected|show|src|srcset|style|strict-di|submit|switch|switch-when|switch-default|' +
+        'readonly|repeat-start|repeat-end|repeat|required|' +
+        'selected|show|src|srcset|style|strict-di|submit|switch-when|switch-default|switch|' +
         'transclude|' +
         'value|' +
         'swipe-left|swipe-right|view|' +
       ')))\\b\\s*(=?)'
     'beginCaptures':
       '1':
-         'name': 'entity.other.attribute-name.html.angular'
+        'name': 'support.other.attribute-name.html.angular'
     'end': '(?<=\'|")|(?=\\s|>)'
     'name': 'meta.attribute.html.angular'
     'patterns': [
@@ -165,7 +166,6 @@
         'beginCaptures':
           '0':
             'name': 'punctuation.definition.string.begin.html.angular'
-        'contentName': 'meta.tag.template.angular'
         'end': '"'
         'endCaptures':
           '0':
@@ -180,7 +180,6 @@
         'beginCaptures':
           '0':
             'name': 'punctuation.definition.string.begin.html.angular'
-        'contentName': 'meta.tag.template.angular'
         'end': '\''
         'endCaptures':
           '0':

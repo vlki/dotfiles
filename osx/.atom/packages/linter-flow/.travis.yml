@@ -1,0 +1,31 @@
+before_install:
+  - brew update
+install:
+  - brew install flow
+
+language: generic
+os:
+  - osx
+
+branches:
+  only:
+    - master
+git:
+  depth: 10
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+env:
+  global:
+    - APM_TEST_PACKAGES=""
+  matrix:
+    - ATOM_CHANNEL=stable
+    - ATOM_CHANNEL=beta
+
+before_script:
+  - flow check
+
+script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'

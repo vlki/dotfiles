@@ -12,12 +12,13 @@ class InsertNlJsx
 
     cursorBufferPosition = @editor.getCursorBufferPosition()
     return true unless cursorBufferPosition.column > 0
-    return true unless 'JSXEndTagStart' in @editor.scopeDescriptorForBufferPosition(cursorBufferPosition).getScopesArray()
+    return true unless 'JSXEndTagStart' is @editor.scopeDescriptorForBufferPosition(cursorBufferPosition).getScopesArray().pop()
     cursorBufferPosition.column--
-    return true unless 'JSXStartTagEnd' in @editor.scopeDescriptorForBufferPosition(cursorBufferPosition).getScopesArray()
-    indentLength = /^\s*\S/.exec(@editor.lineTextForBufferRow(cursorBufferPosition.row))?[0].length
-    pad = new Array(indentLength).join(' ')
-    @editor.insertText("\n#{pad}#{@editor.getTabText()}\n#{pad}")
+    return true unless 'JSXStartTagEnd' is @editor.scopeDescriptorForBufferPosition(cursorBufferPosition).getScopesArray().pop()
+    indentLength = @editor.indentationForBufferRow(cursorBufferPosition.row)
+    @editor.insertText("\n\n")
+    @editor.setIndentationForBufferRow cursorBufferPosition.row+1, indentLength+1, { preserveLeadingWhitespace: false }
+    @editor.setIndentationForBufferRow cursorBufferPosition.row+2, indentLength, { preserveLeadingWhitespace: false }
     @editor.moveUp()
     @editor.moveToEndOfLine()
     false

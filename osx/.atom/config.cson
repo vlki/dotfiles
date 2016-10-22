@@ -2,7 +2,9 @@
   core:
     disabledPackages: [
       "language-hyperlink"
+      "flow-ide"
     ]
+    telemetryConsent: "limited"
   editor:
     fontSize: 12
     invisibles: {}
@@ -12,9 +14,21 @@
     userId: "c68b8575-8ce5-4d1d-3739-65b540f7901d"
   "file-types":
     js: "source.js.jsx"
-  minimap: {}
+  "flow-ide": {}
+  "git-control":
+    showGitFlowButton: false
+  "ide-flow":
+    flowPath: "/usr/local/bin/flow"
+  linter:
+    errorPanelHeight: 35
+  "linter-eslint": {}
+  minimap:
+    plugins:
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
   "one-dark-ui": {}
-  "tree-view": {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
 ".attribute-values.js.jsx.source":

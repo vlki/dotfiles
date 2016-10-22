@@ -1,13 +1,12 @@
 'use babel'
 
-import {CompositeDisposable, Disposable} from 'atom'
 import {EventsDelegation, AncestorsMethods} from 'atom-utils'
-import Main from './main'
-import include from './decorators/include'
-import element from './decorators/element'
 import DOMStylesReader from './mixins/dom-styles-reader'
 import CanvasDrawer from './mixins/canvas-drawer'
-import MinimapQuickSettingsElement from './minimap-quick-settings-element'
+import include from './decorators/include'
+import element from './decorators/element'
+
+let Main, MinimapQuickSettingsElement, CompositeDisposable, Disposable
 
 const SPEC_MODE = atom.inSpecMode()
 
@@ -29,18 +28,6 @@ const SPEC_MODE = atom.inSpecMode()
 @include(DOMStylesReader, CanvasDrawer, EventsDelegation, AncestorsMethods)
 export default class MinimapElement {
 
-  /**
-   * The method that registers the MinimapElement factory in the
-   * `atom.views` registry with the Minimap model.
-   */
-  static registerViewProvider (Minimap) {
-    atom.views.addViewProvider(Minimap, function (model) {
-      let element = new MinimapElement()
-      element.setModel(model)
-      return element
-    })
-  }
-
   //    ##     ##  #######   #######  ##    ##  ######
   //    ##     ## ##     ## ##     ## ##   ##  ##    ##
   //    ##     ## ##     ## ##     ## ##  ##   ##
@@ -55,6 +42,10 @@ export default class MinimapElement {
    * @access private
    */
   createdCallback () {
+    if (!CompositeDisposable) {
+      ({CompositeDisposable, Disposable} = require('atom'))
+    }
+
     // Core properties
 
     /**
@@ -304,6 +295,14 @@ export default class MinimapElement {
         if (this.attached) { this.requestUpdate() }
       },
 
+      'editor.showInvisibles': () => {
+        if (this.attached) { this.requestUpdate() }
+      },
+
+      'editor.invisibles': () => {
+        if (this.attached) { this.requestUpdate() }
+      },
+
       'editor.softWrapAtPreferredLineLength': () => {
         if (this.attached) { this.requestUpdate() }
       }
@@ -379,7 +378,13 @@ export default class MinimapElement {
    */
   attach (parent) {
     if (this.attached) { return }
-    (parent || this.getTextEditorElementRoot()).appendChild(this)
+
+    const container = parent || this.getTextEditorElementRoot()
+    let minimaps = container.querySelectorAll('atom-text-editor-minimap')
+    if (minimaps.length) {
+      Array.prototype.forEach.call(minimaps, (el) => { el.destroy() })
+    }
+    container.appendChild(this)
   }
 
   /**
@@ -546,6 +551,10 @@ export default class MinimapElement {
 
     this.openQuickSettingSubscription = this.subscribeTo(this.openQuickSettings, {
       'mousedown': (e) => {
+        if (!MinimapQuickSettingsElement) {
+          MinimapQuickSettingsElement = require('./minimap-quick-settings-element')
+        }
+
         e.preventDefault()
         e.stopPropagation()
 
@@ -662,6 +671,8 @@ export default class MinimapElement {
    * @return {Minimap} this element's Minimap
    */
   setModel (minimap) {
+    if (!Main) { Main = require('./main') }
+
     this.minimap = minimap
     this.subscriptions.add(this.minimap.onDidChangeScrollTop(() => {
       this.requestUpdate()
@@ -923,6 +934,9 @@ export default class MinimapElement {
   measureHeightAndWidth (visibilityChanged, forceUpdate = true) {
     if (!this.minimap) { return }
 
+    const safeFlexBasis = this.style.flexBasis
+    this.style.flexBasis = ''
+
     let wasResized = this.width !== this.clientWidth || this.height !== this.clientHeight
 
     this.height = this.clientHeight
@@ -957,6 +971,8 @@ export default class MinimapElement {
       }
 
       this.updateCanvasesSize(canvasWidth)
+    } else {
+      this.style.flexBasis = safeFlexBasis
     }
   }
 
@@ -1036,6 +1052,10 @@ export default class MinimapElement {
 
     const scrollTop = row * textEditor.getLineHeightInPixels() - this.minimap.getTextEditorHeight() / 2
     const textEditorScrollTop = textEditorElement.pixelPositionForScreenPosition([row, 0]).top - this.minimap.getTextEditorHeight() / 2
+
+    if (atom.config.get('minimap.moveCursorOnMinimapClick')) {
+      textEditor.setCursorScreenPosition([row, 0])
+    }
 
     if (atom.config.get('minimap.scrollAnimation')) {
       const duration = atom.config.get('minimap.scrollAnimationDuration')
@@ -1145,6 +1165,10 @@ export default class MinimapElement {
    * @access private
    */
   subscribeToMediaQuery () {
+    if (!Disposable) {
+      ({CompositeDisposable, Disposable} = require('atom'))
+    }
+
     const query = 'screen and (-webkit-min-device-pixel-ratio: 1.5)'
     const mediaQuery = window.matchMedia(query)
     const mediaListener = (e) => { this.requestForcedUpdate() }
@@ -1173,6 +1197,10 @@ export default class MinimapElement {
    * @access private
    */
   startDrag ({y, isLeftMouse, isMiddleMouse}) {
+    if (!Disposable) {
+      ({CompositeDisposable, Disposable} = require('atom'))
+    }
+
     if (!this.minimap) { return }
     if (!isLeftMouse && !isMiddleMouse) { return }
 

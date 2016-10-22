@@ -1,6 +1,14 @@
 // SYNTAX TEST "source.js.jsx"
 
 declare module 'a-unique-module-name' {
+// <- keyword.other.declare.flowtype
+ // <- keyword.other.declare.flowtype
+//^^^^^                                  keyword.other.declare.flowtype
+//      ^^^^^^                           storage.type.module.flowtype
+//             ^^^^^^^^^^^^^^^^^^^^^^    string.quoted.single.js
+//             ^                         punctuation.definition.string.begin.js
+//                                  ^    punctuation.definition.string.end.js
+//                                    ^  punctuation.section.class.begin.js
   declare interface Stack<T> {}
 //^^^^^^^ ^^^^^^^^^ ^^^^^^^^ ^^  meta.class.body.js
 //^^^^^^^                        keyword.other.declare.flowtype
@@ -17,33 +25,34 @@ declare module 'a-unique-module-name' {
 //              ^^^^^^^^         ^        ^ ^     entity.name.class.js
 //                       ^^^^^^^   ^^^^^^         meta.class.extends.js
 //                       ^^^^^^^   ^^^^^^         storage.type.extends.js
+//                                         ^      meta.delimiter.comma.js
 //                                            ^   punctuation.section.class.begin.js
 //                                             ^  punctuation.section.class.end.js
   declare module.exports: () => Function;
-//^^^^^^^ ^^^^^^^^^^^^^^^ ^^ ^^ ^^^^^^^^^    meta.class.body.js
-//^^^^^^^                                    keyword.other.declare.flowtype
-//        ^^^^^^ ^^^^^^^                     storage.type.module.flowtype
-//              ^                            keyword.operator.accessor.flowtype
-//                      ^                    punctuation.type.flowtype
-//                        ^                  punctuation.definition.parameters.begin.js
-//                         ^                 punctuation.definition.parameters.end.js
-//                           ^^              storage.type.function.arrow.js
-//                              ^^^^^^^^     support.type.builtin.class.flowtype
-//                                      ^    punctuation.terminator.statement.js
+//^^^^^^^ ^^^^^^^^^^^^^^^ ^^ ^^ ^^^^^^^^^  meta.class.body.js
+//^^^^^^^                                  keyword.other.declare.flowtype
+//        ^^^^^^ ^^^^^^^                   storage.type.module.flowtype
+//              ^                          keyword.operator.accessor.flowtype
+//                      ^                  punctuation.type.flowtype
+//                        ^                punctuation.definition.parameters.begin.js
+//                         ^               punctuation.definition.parameters.end.js
+//                           ^^            storage.type.function.arrow.js
+//                              ^^^^^^^^   support.type.builtin.class.flowtype
+//                                      ^  punctuation.terminator.statement.js
   declare type NextFunction = (error?: Object) => void
-//^^^^^^^ ^^^^ ^^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^^^^ ^^ ^^^^    meta.class.body.js
-//^^^^^^^                                                 keyword.other.declare.flowtype
-//        ^^^^                                            keyword.other.typedef.flowtype
-//             ^^^^^^^^^^^^                               support.type.class.flowtype
-//                            ^                           punctuation.definition.parameters.begin.js
-//                             ^^^^^                      variable.other.readwrite.js
-//                                  ^                     keyword.operator.optional.parameter.flowtype
-//                                   ^                    punctuation.type.flowtype
-//                                     ^^^^^^             support.type.builtin.class.flowtype
-//                                           ^            punctuation.definition.parameters.end.js
-//                                                ^^^^    support.type.builtin.primitive.flowtype
+//^^^^^^^ ^^^^ ^^^^^^^^^^^^ ^ ^^^^^^^^ ^^^^^^^ ^^ ^^^^  meta.class.body.js
+//^^^^^^^                                               keyword.other.declare.flowtype
+//        ^^^^                                          keyword.other.typedef.flowtype
+//             ^^^^^^^^^^^^                             support.type.class.flowtype
+//                            ^                         punctuation.definition.parameters.begin.js
+//                             ^^^^^                    variable.other.readwrite.js
+//                                  ^                   keyword.operator.optional.parameter.flowtype
+//                                   ^                  punctuation.type.flowtype
+//                                     ^^^^^^           support.type.builtin.class.flowtype
+//                                           ^          punctuation.definition.parameters.end.js
+//                                                ^^^^  support.type.builtin.primitive.flowtype
 }
-// <- meta.class.body.js
+// <- punctuation.section.class.end.js
 
 interface Iterator<T> {
 // <- keyword.other.interface.flowtype
@@ -92,34 +101,35 @@ declare var module: {
 //                ^    punctuation.type.flowtype
 //                  ^  meta.brace.round.open.flowtype
     exports: any;
-//  ^^^^^^^        variable.other.property.flowtype
+//  ^^^^^^^        variable.other.readwrite.js
 //         ^       punctuation.type.flowtype
 //           ^^^   support.type.builtin.primitive.flowtype
     require(id: string): any;
-//  ^^^^^^^^^^^ ^^^^^^^        meta.function-call.with-arguments.js
-//  ^^^^^^^                    entity.name.function.js
-//         ^          ^        meta.brace.round.js
-//          ^^  ^^^^^^         variable.other.readwrite.js
-//                     ^       punctuation.type.flowtype
-//                       ^^^   support.type.builtin.primitive.flowtype
+//  ^^^^^^^^^^^ ^^^^^^^^ ^^^   meta.function.method.js
+//  ^^^^^^^                    entity.name.function.method.js
+//         ^                   punctuation.definition.parameters.begin.js
+//          ^^                 variable.other.readwrite.js
+//            ^        ^       punctuation.type.flowtype
+//              ^^^^^^   ^^^   support.type.builtin.primitive.flowtype
+//                    ^        punctuation.definition.parameters.end.js
     id: string;
-//  ^^           variable.other.property.flowtype
+//  ^^           variable.other.readwrite.js
 //    ^          punctuation.type.flowtype
 //      ^^^^^^   support.type.builtin.primitive.flowtype
     filename: string;
-//  ^^^^^^^^           variable.other.property.flowtype
+//  ^^^^^^^^           variable.other.readwrite.js
 //          ^          punctuation.type.flowtype
 //            ^^^^^^   support.type.builtin.primitive.flowtype
     loaded: boolean;
-//  ^^^^^^            variable.other.property.flowtype
+//  ^^^^^^            variable.other.readwrite.js
 //        ^           punctuation.type.flowtype
 //          ^^^^^^^   support.type.builtin.primitive.flowtype
     parent: any;
-//  ^^^^^^        variable.other.property.flowtype
+//  ^^^^^^        variable.other.readwrite.js
 //        ^       punctuation.type.flowtype
 //          ^^^   support.type.builtin.primitive.flowtype
     children: Array<any>;
-//  ^^^^^^^^               variable.other.property.flowtype
+//  ^^^^^^^^               variable.other.readwrite.js
 //          ^              punctuation.type.flowtype
 //            ^^^^^        support.type.builtin.class.flowtype
 //                 ^   ^   punctuation.flowtype
@@ -151,14 +161,14 @@ declare class Blob {
         type?: string
 //      ^^^^^^ ^^^^^^  meta.class.body.js
 //      ^^^^^^ ^^^^^^  meta.function.method.js
-//      ^^^^           variable.other.property.flowtype
+//      ^^^^           variable.other.readwrite.js
 //          ^          keyword.operator.optional.parameter.flowtype
 //           ^         punctuation.type.flowtype
 //             ^^^^^^  support.type.builtin.primitive.flowtype
         endings?: string
 //      ^^^^^^^^^ ^^^^^^  meta.class.body.js
 //      ^^^^^^^^^ ^^^^^^  meta.function.method.js
-//      ^^^^^^^           variable.other.property.flowtype
+//      ^^^^^^^           variable.other.readwrite.js
 //             ^          keyword.operator.optional.parameter.flowtype
 //              ^         punctuation.type.flowtype
 //                ^^^^^^  support.type.builtin.primitive.flowtype
@@ -221,7 +231,7 @@ type child_process$execOpts = {
 //      ^^^^^^  support.type.builtin.class.flowtype
 };
 // <- meta.brace.curly.js
- // <- punctuation.object.end.flowtype
+ // <- punctuation.terminator.statement.js
 
 type ReactClass<D, P, S> = _ReactClass<D, P, S, *>
 // <- keyword.other.typedef.flowtype
@@ -245,5 +255,27 @@ declare function require(id: string): any;
 //                           ^^^^^^   ^^^   support.type.builtin.primitive.flowtype
 //                                 ^        punctuation.definition.parameters.end.js
 //                                       ^  punctuation.terminator.statement.js
+
+declare var foo: (
+// <- keyword.other.declare.flowtype
+ // <- keyword.other.declare.flowtype
+//^^^^^             keyword.other.declare.flowtype
+//      ^^^         storage.type.js
+//          ^^^     storage.type.function.js
+//             ^    punctuation.type.flowtype
+//               ^  punctuation.definition.parameters.begin.js
+  (<T>(x: T) => T) & (<T,U>(x: T, y: U) => U)
+//^   ^              ^     ^                   punctuation.definition.parameters.begin.js
+// ^ ^                ^   ^                    punctutation.flowtype
+//  ^     ^     ^      ^ ^     ^     ^     ^   support.type.class.flowtype
+//     ^                    ^     ^            variable.other.readwrite.js
+//      ^                    ^     ^           punctuation.type.flowtype
+//         ^     ^                    ^     ^  punctuation.definition.parameters.end.js
+//           ^^                         ^^     storage.type.function.arrow.js
+//                 ^                           kewyword.operator.intersection.flowtype
+//                      ^       ^              meta.delimiter.comma.js
+)
+// <- punctuation.definition.parameters.end.js
+
 
 // >> only:(source.js.jsx)
