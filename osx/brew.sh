@@ -81,8 +81,10 @@ brew install tree
 # Commandline tool for doing screenshots of webpages
 # brew install webkit2png
 
-# Node.JS, we want to use JavaScript in console!
+# Node.JS, we want to use JavaScript in console with yarn as a package
+# manager
 brew install node
+brew install yarn
 
 # So we can use Flow JS type-checker
 brew install flow
